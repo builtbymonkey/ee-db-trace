@@ -1,0 +1,22 @@
+/* 
+    Document   : layout
+    Created on : 23-mrt-2013, 7:56:21
+    Author     : frans.cooijmans
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+#form_errors
+{
+    color: red;
+}
+
+input.error
+{
+    border-color: red;
+}
+
+.trace-query
+{
+    border-bottom: 1px solid #ccc;
+}
