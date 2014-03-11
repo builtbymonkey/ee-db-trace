@@ -66,8 +66,8 @@ $config['trace_file_location'] = '/var/www/sites/dwise.nl/db/';
 
 ##Changelog
 
-## 1.1 - 3/11/2014
+### 1.1 - 3/11/2014
 - Fixed a bug where queries with newline characters where included in the trace which are excluded in the config
 - Added config parameter "trace_file_location"
 
-## 1.0 - Initial release
+### 1.0 - Initial release
