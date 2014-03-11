@@ -19,6 +19,7 @@ Add the following keys to your config.php, example for a local dev environment.
 $config['trace_live_site'] = FALSE;
 $config['trace_url'] = 'http://local-dev.dwise.nl/';
 $config['trace_path'] = '/var/www/sites/dwise.nl/';
+$config['trace_file_location'] = '/var/www/sites/dwise.nl/db/';
 
 $config['trace_developer'] = "fccotech";
 $config['trace_include'] = array('update','insert','delete','alter','drop','create');
@@ -49,10 +50,24 @@ SQL actions to be traced, SELECT is excluded by default because it doesn't chang
 
 Tables not to be traced (non critical stuff).
 
+**$config['trace_file_location']**
+
+Allows you to set a location where trace files are stored. Defaults to third_party/trace/files
+
+
 ##Example live site config
 
 ```
 $config['trace_live_site'] = TRUE;
 $config['trace_url'] = 'http://www.dwise.nl/';
 $config['trace_path'] = '/var/www/sites/dwise.nl/';
+$config['trace_file_location'] = '/var/www/sites/dwise.nl/db/';
 ```
+
+##Changelog
+
+## 1.1 - 3/11/2014
+- Fixed a bug where queries with newline characters where included in the trace which are excluded in the config
+- Added config parameter "trace_file_location"
+
+## 1.0 - Initial release

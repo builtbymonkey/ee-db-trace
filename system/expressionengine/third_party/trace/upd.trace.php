@@ -13,7 +13,7 @@ if(!defined('BASEPATH'))
 class Trace_upd
 {
 
-    var $version = '1.0';
+    var $version = '1.1';
 
     function __construct()
     {
