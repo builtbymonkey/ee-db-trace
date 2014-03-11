@@ -17,6 +17,7 @@ class Trace_mcp
 
     private $themes_base_url = '';
     private $base_url = '';
+    private $trace_file_location;
 
     function __construct()
     {
@@ -41,6 +42,17 @@ class Trace_mcp
         $this->EE->cp->set_breadcrumb(BASE . AMP . $this->base_url, 'Trace');
 
         $this->EE->cp->add_to_head('<link type="text/css" href="' . $this->themes_base_url . 'layout.css" rel="stylesheet" />');
+        
+        $this->trace_file_location = APPPATH . "third_party/trace/files/";
+        
+        if($this->EE->config->item('trace_file_location'))
+        {
+            $this->trace_file_location = $this->EE->config->item('trace_file_location');
+            
+            if(substr($this->trace_file_location, -1)!= '/')
+                $this->trace_file_location.= '/';
+        }
+        
     }
 
     function index()
@@ -60,8 +72,9 @@ class Trace_mcp
         $this->EE->cp->set_variable('cp_page_title', lang('trace_module_name'));
 
         $date = gmmktime();
-        $trace_file = APPPATH . "third_party/trace/files/" . $this->EE->config->item('trace_developer') . ".xml";
-
+            
+        $trace_file = $this->trace_file_location . $this->EE->config->item('trace_developer') . ".xml";
+        
         $this->EE->form_validation->set_rules('description', 'Description', 'required');
         $this->EE->form_validation->set_rules('query_md5', 'Queries', 'required');
 
@@ -84,7 +97,7 @@ class Trace_mcp
         {
             $post_queries = $this->EE->input->post('query_md5');
 
-            $release_file = APPPATH . "third_party/trace/files/releases/" . $this->EE->config->item('trace_developer') . "_" . $date . ".xml";
+            $release_file = $this->trace_file_location . 'releases/' . $this->EE->config->item('trace_developer') . "_" . $date . ".xml";
 
             if(!$post_queries)
             {
@@ -164,7 +177,7 @@ class Trace_mcp
 
         $this->EE->cp->set_variable('cp_page_title', lang('trace_module_name'));
 
-        $file_releases = get_filenames(APPPATH . "third_party/trace/files/releases", TRUE);
+        $file_releases = get_filenames($this->trace_file_location. "releases", TRUE);
         $db_releases = $this->EE->db->get('trace_releases');
 
         $releases = array();
@@ -221,8 +234,8 @@ class Trace_mcp
         // set state to publishing, this will disable tracing for the moment
         $this->EE->session->set_cache('trace', 'status', 'publishing');
 
-        $file = APPPATH . "third_party/trace/files/releases/" . $this->EE->input->get('release') . '.xml';
-        $backup_file = APPPATH . "third_party/trace/files/releases/" . $this->EE->input->get('release') . '_backup.sql';
+        $file = $this->trace_file_location . "releases/" . $this->EE->input->get('release') . '.xml';
+        $backup_file = $this->trace_file_location . "releases/" . $this->EE->input->get('release') . '_backup.sql';
 
         if(!file_exists($file) || !$this->EE->input->get('release'))
         {
@@ -364,7 +377,7 @@ class Trace_mcp
     {
         $this->EE->cp->set_variable('cp_page_title', "Clear queries");
         
-        $file = APPPATH . "third_party/trace/files/" . $this->EE->config->item('trace_developer') . ".xml";
+        $file = $this->trace_file_location . $this->EE->config->item('trace_developer') . ".xml";
 
         if(file_exists($file))
             unlink($file);
@@ -378,7 +391,7 @@ class Trace_mcp
 
         $this->EE->session->set_cache('trace', 'status', 'publishing');
 
-        $backup_file = APPPATH . "third_party/trace/files/releases/" . $this->EE->input->get('release') . '_backup.sql';
+        $backup_file = $this->trace_file_location . "releases/" . $this->EE->input->get('release') . '_backup.sql';
 
         if(file_exists($backup_file))
         {
