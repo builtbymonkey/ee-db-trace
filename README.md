@@ -66,6 +66,10 @@ $config['trace_file_location'] = '/var/www/sites/dwise.nl/db/';
 
 ##Changelog
 
+### 1.1.1 - 3/25/2014
+- Fixed a bug where the release folder structure was not created properly
+- Fixed a small bug in the CP when no release files are present
+
 ### 1.1 - 3/11/2014
 - Fixed a bug where queries with newline characters where included in the trace which are excluded in the config
 - Added config parameter "trace_file_location"
