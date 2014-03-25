@@ -37,8 +37,13 @@ class Xml_model
         else
         {
             if($create_if_not_exists)
+            {               
+                if(!is_dir(dirname($file)))
+                    mkdir(dirname($file),0777,TRUE);
+                
                 if(is_writable(dirname($file)))
                     return TRUE;
+            }
         }
         
         return FALSE;

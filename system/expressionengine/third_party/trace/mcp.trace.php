@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @package		DB Trace Module
  * @author		Frans Cooijmans, dWise
@@ -6,7 +7,6 @@
  * @license		http://www.gnu.org/licenses/gpl-2.0.txt
  * @link		http://www.dwise.nl
  */
- 
 if(!defined('BASEPATH'))
     exit('No direct script access allowed');
 
@@ -42,17 +42,16 @@ class Trace_mcp
         $this->EE->cp->set_breadcrumb(BASE . AMP . $this->base_url, 'Trace');
 
         $this->EE->cp->add_to_head('<link type="text/css" href="' . $this->themes_base_url . 'layout.css" rel="stylesheet" />');
-        
+
         $this->trace_file_location = APPPATH . "third_party/trace/files/";
-        
+
         if($this->EE->config->item('trace_file_location'))
         {
             $this->trace_file_location = $this->EE->config->item('trace_file_location');
-            
-            if(substr($this->trace_file_location, -1)!= '/')
+
+            if(substr($this->trace_file_location, -1) != '/')
                 $this->trace_file_location.= '/';
         }
-        
     }
 
     function index()
@@ -72,9 +71,9 @@ class Trace_mcp
         $this->EE->cp->set_variable('cp_page_title', lang('trace_module_name'));
 
         $date = gmmktime();
-            
+
         $trace_file = $this->trace_file_location . $this->EE->config->item('trace_developer') . ".xml";
-        
+
         $this->EE->form_validation->set_rules('description', 'Description', 'required');
         $this->EE->form_validation->set_rules('query_md5', 'Queries', 'required');
 
@@ -177,26 +176,29 @@ class Trace_mcp
 
         $this->EE->cp->set_variable('cp_page_title', lang('trace_module_name'));
 
-        $file_releases = get_filenames($this->trace_file_location. "releases", TRUE);
+        $file_releases = get_filenames($this->trace_file_location . "releases", TRUE);
         $db_releases = $this->EE->db->get('trace_releases');
 
         $releases = array();
 
-        //get info about release files
-        // @todo: check voor xml extensie
-        foreach($file_releases as $file)
+
+        if($file_releases)
         {
-            $file_parts = pathinfo($file);
-
-            if($file_parts['extension'] == 'xml')
+            //get info about release files
+            // @todo: check voor xml extensie
+            foreach($file_releases as $file)
             {
-                if($this->EE->xml_release_model->load($file))
-                {
-                    $meta = $this->EE->xml_release_model->get_meta();
+                $file_parts = pathinfo($file);
 
-                    $releases[$meta->md5] = $meta;
+                if($file_parts['extension'] == 'xml')
+                {
+                    if($this->EE->xml_release_model->load($file))
+                    {
+                        $meta = $this->EE->xml_release_model->get_meta();
+
+                        $releases[$meta->md5] = $meta;
+                    }
                 }
-                
             }
         }
 
@@ -376,7 +378,7 @@ class Trace_mcp
     function clear()
     {
         $this->EE->cp->set_variable('cp_page_title', "Clear queries");
-        
+
         $file = $this->trace_file_location . $this->EE->config->item('trace_developer') . ".xml";
 
         if(file_exists($file))
