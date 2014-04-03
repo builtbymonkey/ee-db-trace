@@ -68,7 +68,7 @@ class Trace_mcp
         $this->EE->load->model('xml_release_model');
         $this->EE->load->library('form_validation');
 
-        $this->EE->cp->set_variable('cp_page_title', lang('trace_module_name'));
+        $this->EE->view->cp_page_title = lang('trace_module_name');
 
         $date = gmmktime();
 
