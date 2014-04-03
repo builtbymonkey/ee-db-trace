@@ -174,7 +174,7 @@ class Trace_mcp
         $this->EE->load->model('xml_release_model');
         $this->EE->load->helper('file');
 
-        $this->EE->cp->set_variable('cp_page_title', lang('trace_module_name'));
+        $this->EE->view->cp_page_title = lang('trace_module_name');
 
         $file_releases = get_filenames($this->trace_file_location . "releases", TRUE);
         $db_releases = $this->EE->db->get('trace_releases');
