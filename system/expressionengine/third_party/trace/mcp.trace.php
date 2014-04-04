@@ -84,7 +84,6 @@ class Trace_mcp
                 return $this->EE->load->view('no_trace', FALSE, TRUE);
 
             $view['errors'] = $this->EE->form_validation->error_string();
-            ;
 
             $view['developer'] = $this->EE->config->item('trace_developer');
             $view['query_batches'] = $this->EE->xml_trace_model->get_all_query_batches();

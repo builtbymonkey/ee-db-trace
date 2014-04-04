@@ -3,6 +3,10 @@ ExpressionEngine DB Trace Module
 
 The general concept is to trace your local db changes and store them into a release file. Release files can be deployed through FTP/GIT/SVN/Etc, after deploy you can do an install of the release, pushing all your db changes.
 
+##Requirements
+- MySQL as DB
+- ExpressionEngine 2.6 or higher
+
 ##Installation
 
 - Copy database driver mysql_trace folder to system\codeigniter\system\database\drivers
