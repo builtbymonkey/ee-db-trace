@@ -356,7 +356,7 @@ class Trace_mcp
                 'date' => $meta->date, 'description' => $meta->description));
         }
 
-        $this->EE->cp->set_variable('cp_page_title', "Release installation results");
+        $this->EE->view->cp_page_title = "Release installation results";
 
 
         $this->EE->session->set_cache('trace', 'status', 'done');
@@ -376,7 +376,7 @@ class Trace_mcp
 
     function clear()
     {
-        $this->EE->cp->set_variable('cp_page_title', "Clear queries");
+        $this->EE->view->cp_page_title = "Clear queries";
 
         $file = $this->trace_file_location . $this->EE->config->item('trace_developer') . ".xml";
 
@@ -388,7 +388,7 @@ class Trace_mcp
 
     function rollback()
     {
-        $this->EE->cp->set_variable('cp_page_title', "Rollback results");
+        $this->EE->view->cp_page_title = "Rollback results";
 
         $this->EE->session->set_cache('trace', 'status', 'publishing');
 
