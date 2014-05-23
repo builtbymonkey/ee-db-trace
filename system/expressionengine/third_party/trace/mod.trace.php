@@ -18,11 +18,11 @@ class Trace
     function __construct()
     {
         $this->EE = & get_instance();
-        $this->EE->load->add_package_path(APPPATH . 'third_party/trace/');
+        $this->EE->load->add_package_path(PATH_THIRD . 'trace/');
 
         $this->page_load_id = md5($_SERVER["REQUEST_URI"] . '|' . gmmktime());
         
-        $this->trace_file_location = APPPATH . "third_party/trace/files/";
+        $this->trace_file_location = PATH_THIRD . "trace/files/";
         
         if($this->EE->config->item('trace_file_location'))
         {
