@@ -4,7 +4,7 @@ if(!defined('BASEPATH'))
 
 
 require_once BASEPATH . 'database/drivers/mysql/mysql_driver.php';
-require_once APPPATH . 'third_party/trace/mod.trace.php';
+require_once PATH_THIRD . 'trace/mod.trace.php';
 
 class CI_DB_mysql_trace_driver extends CI_DB_mysql_driver
 {

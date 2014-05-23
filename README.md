@@ -13,7 +13,7 @@ The general concept is to trace your local db changes and store them into a rele
 - Copy other folders to appropriate EE folders
 - Add config values (see below).
 - Change your in db driver in config/database.php to mysql_trace
-- Make thrid_party/trace/files writeable (chmod 777)
+- Make your trace_file_location writeable (chmod 777)
 
 ##Configuration
 
